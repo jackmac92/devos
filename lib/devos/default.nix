@@ -9,7 +9,13 @@
 
   profileMap = map (profile: profile.default);
 
+  mkDevos = dev.callLibs ./mkDevos.nix;
+
   mkNodes = dev.callLibs ./mkNodes.nix;
+
+  mkHosts = dev.callLibs ./mkHosts.nix;
+
+  mkSuites = dev.callLibs ./mkSuites.nix;
 
   mkProfileAttrs = dev.callLibs ./mkProfileAttrs.nix;
 
