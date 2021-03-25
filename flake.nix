@@ -18,7 +18,7 @@
       devshell.url = "github:numtide/devshell";
       flake-compat.url = "github:BBBSnowball/flake-compat/pr-1";
       flake-compat.flake = false;
-      home.url = "github:nix-community/home-manager";
+      home.url = "github:nrdxp/home-manager/sharedModules-fix";
       home.inputs.nixpkgs.follows = "nixos";
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "override";
@@ -77,7 +77,8 @@
               tests = nixos.lib.optionalAttrs (system == "x86_64-linux")
                 (import ./tests { inherit self pkgs; });
               deployHosts = nixos.lib.filterAttrs
-                (n: _: self.nixosConfigurations.${n}.config.nixpkgs.system == system) self.deploy.nodes;
+                (n: _: self.nixosConfigurations.${n}.config.nixpkgs.system == system)
+                self.deploy.nodes;
               deployChecks = deploy.lib.${system}.deployChecks { nodes = deployHosts; };
             in
             nixos.lib.recursiveUpdate tests deployChecks;
